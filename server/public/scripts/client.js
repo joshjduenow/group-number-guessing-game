@@ -27,6 +27,16 @@ function submitRandom(event) {
 
     
   }
+  // let newRound = {
+  //   playerOne: playerOne,
+  //   playerTwo: playerTwo,
+  //   playerThree: playerThree,
+  //   numberOne: Number(numberOne),
+  //   numberTwo: Number(numberTwo),
+  //   numberThree: Number(numberThree),
+
+    
+  // }
   axios({
     method: 'POST',
     url: '/round',
