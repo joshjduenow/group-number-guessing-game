@@ -32,10 +32,38 @@ function submitRandom(event) {
     url: '/round',
     data: newRound
 }).then((response) => {
-    getInventory()
+    getRound()
 })
 
   console.log("JavaScript is loaded!")
+}
+
+function getRound() {
+  axios({
+    url: '/round',
+    method: 'GET'
+}).then((response) => {
+    console.log('response.data:', response.data)
+    let currentRound = response.data
+    //let contentDiv = document.querySelector('');
+    renderRound(currentRound)
+})
+
+}
+function renderRound(currentRound) {
+let rounds = document.getElementById('playerRound');
+rounds.innerHTML = '';
+for (let round of rounds) {
+  rounds.innerHTML += `
+  <td>${round.numberOne}</td>
+  <td>${round.numberTwo}</td>
+  <td>${round.numberThree}</td>
+  <td>${round.randomNumber}</td>
+
+
+`
+}
+
 }
 
 
