@@ -34,7 +34,7 @@ app.post('/round', (req, res) => {
 
 app.get('/round', (req, res) => {
   console.log('GET /round!')
-  res.send(roundArray)
+  res.send( { array: roundArray, randomNumber: randomNumber} )
 })
 
 

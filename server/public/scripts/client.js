@@ -47,6 +47,16 @@ function submitRandom(event) {
 
   console.log("JavaScript is loaded!")
 }
+function resetRound(){
+
+axios({
+    method: 'POST',
+    url: '/randomNumber',
+    data: randomNumber
+}).then((response) => {
+    getRound()
+})
+}
 
 function getRound() {
   axios({
@@ -54,27 +64,61 @@ function getRound() {
     method: 'GET'
 }).then((response) => {
     console.log('response.data:', response.data)
-    let currentRound = response.data
+    let currentRound = response.data.array
+    let randomNumber = response.data.randomNumber 
     //let contentDiv = document.querySelector('');
-    renderRound(currentRound)
+    renderRound(currentRound, randomNumber)
 })
 
 }
-function renderRound(currentRound) {
-let rounds = document.getElementById('playerRound');
-rounds.innerHTML = '';
+function renderRound(currentRound, randomNumber) {
 for (let round of rounds) {
+  if (round.numberOne === randomNumber) {
+    renderWinnerOne(currentRound)
+  } 
+  else if (round.numberTwo === randomNumber) {
+    renderWinnerTwo()
+  }  
+  else if (round.numberThree === randomNumber) {
+    renderWinnerThree()
+  }
+  else {renderLoser()}
+}
+}
+function renderWinnerOne(currentRound){
+  let rounds = document.getElementById('playerRound');
+  rounds.innerHTML = '';
   rounds.innerHTML += `
-  <td>${round.numberOne}</td>
-  <td>${round.numberTwo}</td>
-  <td>${round.numberThree}</td>
-  <td>${round.randomNumber}</td>
+  <td class = "Winner">${currentRound.numberOne}</td>
+  <td>${currentRound.numberTwo}</td>
+  <td>${currentRound.numberThree}</td>
+`}
+function renderWinnerTwo(currentRound){
+  let rounds = document.getElementById('playerRound');
+  rounds.innerHTML = '';
+  rounds.innerHTML += `
+  <td>${currentRound.numberOne}</td>
+  <td class = "Winner">${currentRound.numberTwo}</td>
+  <td>${currentRound.numberThree}</td>
+`}
+function renderWinnerThree(currentRound){
+  let rounds = document.getElementById('playerRound');
+  rounds.innerHTML = '';
+  rounds.innerHTML += `
+  <td>${currentRound.numberOne}</td>
+  <td>${currentRound.numberTwo}</td>
+  <td class = "Winner">${currentRound.numberThree}</td>
+`}
+function renderLoser(currentRound){
+  let rounds = document.getElementById('playerRound');
+  rounds.innerHTML = '';
+  rounds.innerHTML += `
+  <td>${currentRound.numberOne}</td>
+  <td>${currentRound.numberTwo}</td>
+  <td>${currentRound.numberThree}</td>
+`}
 
 
-`
-}
-
-}
 
 
 
